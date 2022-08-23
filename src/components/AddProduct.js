@@ -6,6 +6,18 @@ import { addProduct } from "../redux/actions/Actions";
 const AddProduct = () => {
   const ref = useRef();
   const dispatch = useDispatch();
+  let imageURL = null;
+
+  const onImageUploadHandler =  async (event) => {
+    const reader = new FileReader();
+    await reader.readAsDataURL(event.target.files[0]);
+
+    reader.onload = () => {
+      console.log(reader.result);
+      imageURL = reader.result;
+    }
+    
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,7 +26,7 @@ const AddProduct = () => {
       addProduct({
         id: ref.current.elements.name.value + ref.current.elements.category.value,
         name: ref.current.elements.name.value,
-        image: "",
+        image: imageURL,
         description: ref.current.elements.description.value,
         price: ref.current.elements.price.value,
         category: ref.current.elements.category.value,
@@ -32,7 +44,7 @@ const AddProduct = () => {
         onSubmit={handleSubmit}
       >
         <input type="text" placeholder="Enter Name" id="name" />
-        <input type="file" id="image" />
+        <input type="file" id="image" onChange={onImageUploadHandler} />
         <input type="text" placeholder="Enter Description" id="description" />
         <input type="number" placeholder="Enter Price" id="price" />
         <select name="category" id="category">
