@@ -8,10 +8,9 @@ const AddProduct = () => {
   const dispatch = useDispatch();
   let imageURL = null;
 
-  const onImageUploadHandler =  async (event) => {
+  const onImageUploadHandler =  (event) => {
     const reader = new FileReader();
-    await reader.readAsDataURL(event.target.files[0]);
-
+    reader.readAsDataURL(event.target.files[0]);
     reader.onload = () => {
       console.log(reader.result);
       imageURL = reader.result;
@@ -47,8 +46,8 @@ const AddProduct = () => {
         <input type="file" id="image" onChange={onImageUploadHandler} />
         <input type="text" placeholder="Enter Description" id="description" />
         <input type="number" placeholder="Enter Price" id="price" />
-        <select name="category" id="category">
-          <option value="0" selected disabled>
+        <select name="category" id="category" defaultValue={'DEFAULT'}>
+          <option value="DEFAULT" disabled>
             Select Category
           </option>
           <option value="philips">Philips</option>
