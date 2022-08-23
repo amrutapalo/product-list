@@ -1,0 +1,11 @@
+.product-container .product-image img{
+    height: 100px;
+}
+.product-container .product-image{
+    display: inline;
+}
+
+.product-container{
+    margin: 1em;
+    border: 1px solid palegoldenrod;
+}
