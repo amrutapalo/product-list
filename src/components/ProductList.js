@@ -4,13 +4,19 @@ import Product from "./Product";
 import "./ProductList.css";
 
 const ProductList = () => {
-  const products = useSelector((state) => state.productReducer);
+  const products = useSelector((state) =>
+    state.searchReducer.productList.length == 0
+      ? state.productReducer
+      : state.searchReducer
+  );
+  const searchedProducts = useSelector((state) => state.searchReducer);
+
   console.log(products.productList);
-  console.log(products)
+  console.log(products);
 
   return (
     <div className="productList">
-      {products.productList.map((element) => 
+      {products.productList.map((element) => (
         <Product
           id={element.id}
           key={element.id}
@@ -21,7 +27,7 @@ const ProductList = () => {
           category={element.category}
           ratings={element.ratings}
         ></Product>
-      )}
+      ))}
     </div>
   );
 };

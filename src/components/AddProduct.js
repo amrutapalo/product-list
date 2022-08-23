@@ -50,10 +50,10 @@ const AddProduct = () => {
           <option value="DEFAULT" disabled>
             Select Category
           </option>
-          <option value="philips">Philips</option>
-          <option value="sony">Sony</option>
-          <option value="panasonic">Panasonic</option>
-          <option value="lg">LG</option>
+          <option value="books">Books</option>
+          <option value="mobile">Mobile</option>
+          <option value="television">Television</option>
+          <option value="shoes">Shoes</option>
         </select>
         <input type="text" placeholder="Enter Ratings" id="ratings" />
         <button type="submit">submit</button>

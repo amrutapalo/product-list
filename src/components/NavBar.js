@@ -12,11 +12,13 @@ const NavBar = () => {
           </li>
           <li>
             <i className="fa-solid fa-heart"></i>
-            <div className="wishList">WishList</div>
+            <span className="wishlist-number">0</span>
+            <span className="wishList">WishList</span>
           </li>
           <li>
             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            <div className="Cart">Cart</div>
+            <span className="cart-number">0</span>
+            <span className="cart">Cart</span>
           </li>
         </ul>
       </nav>

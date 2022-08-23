@@ -26,3 +26,10 @@ export const deleteProduct = (productId) => {
         payload : productId
     }
 }
+
+export const searchProducts = (searchRequest) => {
+    return {
+        type : ActionTypes.SEARCH_PRODUCTS,
+        payload : searchRequest
+    }
+}
