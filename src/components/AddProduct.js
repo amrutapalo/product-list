@@ -35,7 +35,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div>
+    <div className="add-product-container">
       <form
         action=""
         className="add-product-form"
@@ -43,8 +43,8 @@ const AddProduct = () => {
         onSubmit={handleSubmit}
       >
         <input type="text" placeholder="Enter Name" id="name" />
-        <input type="file" id="image" onChange={onImageUploadHandler} />
         <input type="text" placeholder="Enter Description" id="description" />
+
         <input type="number" placeholder="Enter Price" id="price" />
         <select name="category" id="category" defaultValue={'DEFAULT'}>
           <option value="DEFAULT" disabled>
@@ -56,7 +56,8 @@ const AddProduct = () => {
           <option value="shoes">Shoes</option>
         </select>
         <input type="text" placeholder="Enter Ratings" id="ratings" />
-        <button type="submit">submit</button>
+        <input type="file" id="image-input" onChange={onImageUploadHandler}/>
+        <button type="submit" className="submit-button">Submit</button>
       </form>
     </div>
   );

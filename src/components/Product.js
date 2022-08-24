@@ -5,36 +5,49 @@ import {
   deleteProduct,
   editProduct,
   addToCart,
+  addToWishlist,
 } from "../redux/actions/Actions";
 import EditModal from "./EditModal";
 
 const Product = (props) => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [productWishlisted, setProductWishlisted] = useState(false);
 
   const quantityHandler = (operation) => {
     if (operation === "decrement") {
-      setQuantity(quantity - 1);
+      setCartQuantity(cartQuantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      setCartQuantity(cartQuantity + 1);
     }
   };
 
   useEffect(() => {
-    if (quantity) {
+    if (cartQuantity) {
       dispatch(
         addToCart({
-          quantity: quantity,
+          quantity: cartQuantity,
           product: props,
         })
       );
     }
-  }, [quantity]);
+  }, [cartQuantity]);
+
+  useEffect(() => {
+    if (productWishlisted) {
+      dispatch(
+        addToWishlist({
+          isWishlisted: productWishlisted,
+          product: props,
+        })
+      );
+    }
+  }, [productWishlisted]);
 
   // const addQuantityToCart = () => {
   //   dispatch(addToCart({
-  //     quantity: quantity,
+  //     cartQuantity: cartQuantity,
   //     product: props
   //   }))
   // }
@@ -45,56 +58,76 @@ const Product = (props) => {
         <div className="product-image">
           <img src={props.image} alt="image" />
         </div>
-        <div className="product-name" id="product-name">
-          {props.name}
-        </div>
-        <div className="product-description" id="product-description">
-          {props.description}
-        </div>
-        <div className="product-price" id="product-price">
-          {props.price}
-        </div>
-        <div className="category" id="category">
-          {props.category}
-        </div>
-        <div className="ratings" id="ratings">
-          {props.ratings}
-        </div>
-        <div className="delete-icon" id="delete-icon">
-          <i
-            className="fa-solid fa-trash-can"
-            onClick={() => dispatch(deleteProduct(props.id))}
-          ></i>
-        </div>
-        <div className="edit-icon" id="edit-icon">
-          <i
-            className="fa-solid fa-pen-to-square"
-            onClick={() => {
-              dispatch(editProduct(props));
-              setShowModal(true);
-            }}
-          ></i>
-        </div>
-        <div className="add-to-cart" id="add-to-cart">
-          <button
-            className="cart-minus"
-            onClick={() => quantityHandler("decrement")}
-            disabled={quantity ? false : true}
+        <div className="product-details">
+          <div className="product-name product-detail" id="product-name">
+            {props.name}
+          </div>
+          <div
+            className="product-description product-detail"
+            id="product-description"
           >
-            -
-          </button>
-          <span className="quantity">{quantity}</span>
-          <button
-            className="cart-plus"
-            onClick={() => quantityHandler("increment")}
-          >
-            +
-          </button>
-          {/* <button disabled={quantity ? false : true} onClick={addQuantityToCart}>Add to Cart</button> */}
-        </div>
-        <div className="add-to-wishlist-icon" id="add-to-wishlist-icon">
-          <i className="fa-regular fa-heart"></i>
-          <i className="fa-solid fa-heart"></i>
+            {props.description}
+          </div>
+          <div className="ratings product-detail" id="ratings">
+            {props.ratings}
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div className="product-price product-detail" id="product-price">
+            &#x20B9;{props.price}
+          </div>
+          <div className="category product-detail" id="category">
+            {props.category}
+          </div>
+
+          <div className="product-utilities product-detail">
+            <div className="delete-icon product-utility" id="delete-icon">
+              <i
+                className="fa-solid fa-trash-can"
+                onClick={() => dispatch(deleteProduct(props.id))}
+              ></i>
+            </div>
+            <div className="edit-icon product-utility" id="edit-icon">
+              <i
+                className="fa-solid fa-pen-to-square"
+                onClick={() => {
+                  dispatch(editProduct(props));
+                  setShowModal(true);
+                }}
+              ></i>
+            </div>
+            <div className="add-to-cart product-utility" id="add-to-cart">
+              <button
+                className="cart-minus"
+                onClick={() => quantityHandler("decrement")}
+                disabled={cartQuantity ? false : true}
+              >
+                -
+              </button>
+              <span className="cartQuantity">{cartQuantity}</span>
+              <button
+                className="cart-plus"
+                onClick={() => quantityHandler("increment")}
+              >
+                +
+              </button>
+              {/* <button disabled={cartQuantity ? false : true} onClick={addQuantityToCart}>Add to Cart</button> */}
+            </div>
+            <div
+              className="add-to-wishlist-icon product-utility"
+              id="add-to-wishlist-icon"
+            >
+              <i
+                className="fa-regular fa-heart"
+                onClick={() => setProductWishlisted(!productWishlisted)}
+              ></i>
+              {productWishlisted && (
+                <i
+                  className={`fa-solid fa-heart`}
+                  onClick={() => setProductWishlisted(!productWishlisted)}
+                ></i>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       {showModal && <EditModal id={props.id}></EditModal>}

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Product from "./Product";
 import "./ProductList.css";
+import defaultImage from '../images/image-not-found.jpeg'
 
 const ProductList = () => {
   const products = useSelector((state) =>
@@ -20,7 +21,7 @@ const ProductList = () => {
           key={element.id}
           name={element.name}
           description={element.description}
-          image={element.image}
+          image={element.image ? element.image : defaultImage}
           price={element.price}
           category={element.category}
           ratings={element.ratings}

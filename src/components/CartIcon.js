@@ -5,11 +5,11 @@ const CartIcon = () => {
   const quantity = useSelector((state) => state.productReducer.totalCart);
 
   return (
-    <>
-      <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-      <span className="cart-number">{quantity}</span>
-      <span className="cart">Cart</span>
-    </>
+    <div className="cart-icon">
+      <i className="fa fa-shopping-cart icon-component" aria-hidden="true"></i>
+      <span className="cart icon-component">Cart</span>
+      <span className="cart-number icon-component">{quantity}</span>
+    </div>
   );
 };
 

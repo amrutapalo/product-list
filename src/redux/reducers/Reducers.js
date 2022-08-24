@@ -1,6 +1,4 @@
 import ActionTypes from "../constants/ActionTypes";
-import atomicHabitsImage from "/Users/amrutapalo/Desktop/chkdin/src/images/atomicHabits.webp";
-import lastLecture from "/Users/amrutapalo/Desktop/chkdin/src/images/lastlecture.webp";
 
 // Reducers.js -- Here, we are managing state data
 
@@ -16,9 +14,10 @@ let initialState = {
     expression: "",
     type: "name",
   },
-  wishlist: 0,
+  totalWishlist: 0,
   totalCart: 0,
   cart: [],
+  wishlist: []
 };
 
 //  ---- REDUCERS -----
@@ -108,13 +107,10 @@ export const productReducer = (state = initialState, action) => {
 
     case ActionTypes.ADD_TO_CART:
       console.log("ADD_TO_CART:", action.payload);
-      //todo - individually
       let found = -1;
       found = state.cart.findIndex(
         (el) => el.productId === action.payload["product"].id
       );
-
-      console.log("index: ", found);
       if (found == -1)
         state.cart.push({
           quantity: action.payload.quantity,
@@ -123,13 +119,30 @@ export const productReducer = (state = initialState, action) => {
       else {
         state.cart[found].quantity = action.payload.quantity;
       }
-
-      console.log("ADD_TO_CART:", state.cart);
-      return { ...state, totalCart: state.cart.reduce((n, object) => n + object.quantity, 0) };
+      return {
+        ...state,
+        totalCart: state.cart.reduce((n, object) => n + object.quantity, 0),
+      };
 
     case ActionTypes.ADD_TO_WISHLIST:
       console.log("ADD_TO_WISHLIST:", action.payload);
-      return state;
+
+      // let foundWish = -1;
+      // foundWish = state.wishlist.findIndex(
+      //   (el) => el.productId === action.payload["product"].id
+      // );
+      // if (foundWish == -1)
+      //   state.wishlist.push({
+      //     quantity: 1,
+      //     productId: action.payload["product"].id,
+      //   });
+      // else {
+      //   state.wishlist[foundWish].quantity = action.payload.quantity;
+      // }
+      return {
+        ...state,
+        totalWishlist: action.payload.isWishlisted? state.totalWishlist + 1 : state.totalWishlist - 1,
+      };
 
     default:
       return state;

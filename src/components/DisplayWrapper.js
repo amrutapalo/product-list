@@ -5,10 +5,10 @@ import ProductList from "./ProductList";
 
 const DisplayWrapper = () => {
   return (
-    <>
-      <Filter></Filter>
+    <div className="displayWrapper">
+      {/* <Filter></Filter> */}
       <ProductList></ProductList>
-    </>
+    </div>
   );
 };
 
