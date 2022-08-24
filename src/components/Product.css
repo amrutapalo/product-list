@@ -7,6 +7,7 @@
 
 .product-container .product-image {
   height: 100%;
+  overflow: hidden;
 }
 
 .product-container .product-image {
@@ -142,6 +143,39 @@
   color: rgb(107, 105, 105);
 }
 
-.product-utility .fa-regular:hover{
+.product-utility .fa-regular:hover {
   color: rgb(62, 61, 61);
+}
+
+@media (max-width: 654px) {
+  .product-name {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+
+  .product-description {
+    font-size: 9px;
+    font-weight: 300;
+    padding-top: 0;
+  }
+
+  .product-price {
+    line-height: 1.4;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .category {
+    font-size: 8px;
+  }
+
+  .ratings {
+    font-size: 10px;
+  }
+
+  .product-container {
+    flex-direction: column;
+    height: 300px;
+  }
 }

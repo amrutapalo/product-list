@@ -32,6 +32,8 @@ const AddProduct = () => {
         ratings: ref.current.elements.ratings.value,
       })
     );
+
+    event.target.reset();
   };
 
   return (

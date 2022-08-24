@@ -1,4 +1,11 @@
-.products-wrapper{
-    display: flex;
-    flex-direction: row;
+.products-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 900px) {
+  .products-wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }

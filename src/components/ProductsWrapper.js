@@ -6,8 +6,8 @@ import DisplayWrapper from "./DisplayWrapper";
 const ProductsWrapper = () => {
   return (
     <div className="products-wrapper">
-      <AddProduct></AddProduct>
       <DisplayWrapper></DisplayWrapper>
+      <AddProduct></AddProduct>
     </div>
   );
 };
