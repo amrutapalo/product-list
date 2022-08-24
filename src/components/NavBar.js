@@ -1,6 +1,8 @@
 import React from "react";
+import Cart from "./Cart";
 import "./NavBar.css";
 import SearchBar from "./SearchBar";
+import Wishlist from "./Wishlist";
 
 const NavBar = () => {
   return (
@@ -11,14 +13,10 @@ const NavBar = () => {
             <SearchBar></SearchBar>
           </li>
           <li>
-            <i className="fa-solid fa-heart"></i>
-            <span className="wishlist-number">0</span>
-            <span className="wishList">WishList</span>
+            <Wishlist></Wishlist>
           </li>
           <li>
-            <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            <span className="cart-number">0</span>
-            <span className="cart">Cart</span>
+           <Cart></Cart>
           </li>
         </ul>
       </nav>

@@ -4,7 +4,7 @@ import { searchProducts } from "../redux/actions/Actions";
 import './SearchBar.css';
 
 const SearchBar = () => {
-  const searchRequest = useSelector((state) => state.searchReducer.searchRequest);
+  const searchRequest = useSelector((state) => state.productReducer.searchRequest);
   const dispatch = useDispatch();
   const ref = useRef();
   console.log(ref);

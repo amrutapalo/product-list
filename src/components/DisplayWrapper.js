@@ -1,12 +1,12 @@
 import React from "react";
 import "./DisplayWrapper.css";
-import Menu from "./Menu";
+import Filter from "./Filter";
 import ProductList from "./ProductList";
 
 const DisplayWrapper = () => {
   return (
     <>
-      <Menu></Menu>
+      <Filter></Filter>
       <ProductList></ProductList>
     </>
   );

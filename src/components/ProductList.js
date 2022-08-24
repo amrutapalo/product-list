@@ -5,18 +5,18 @@ import "./ProductList.css";
 
 const ProductList = () => {
   const products = useSelector((state) =>
-    state.searchReducer.productList.length == 0
-      ? state.productReducer
-      : state.searchReducer
+    state.productReducer.searchedProducts.length !== 0
+      ? state.productReducer.searchedProducts
+      : state.productReducer.productList
   );
-  const searchedProducts = useSelector((state) => state.searchReducer);
+  // const searchedProducts = useSelector((state) => state.searchReducer);
 
-  console.log(products.productList);
   console.log(products);
+  // console.log(searchedProducts);
 
   return (
     <div className="productList">
-      {products.productList.map((element) => (
+      {products.map((element) => (
         <Product
           id={element.id}
           key={element.id}
