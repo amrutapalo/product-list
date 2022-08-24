@@ -33,3 +33,18 @@ export const searchProducts = (searchRequest) => {
         payload : searchRequest
     }
 }
+
+export const addToCart = (request) => {
+    return {
+        type : ActionTypes.ADD_TO_CART,
+        payload : request
+    }
+}
+
+export const addToWishlist = (request) => {
+    return {
+        type : ActionTypes.ADD_TO_WISHLIST,
+        payload : request
+    }
+}
+

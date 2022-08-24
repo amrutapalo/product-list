@@ -1,8 +1,8 @@
 import React from "react";
-import Cart from "./Cart";
+import Cart from "./CartIcon";
 import "./NavBar.css";
 import SearchBar from "./SearchBar";
-import Wishlist from "./Wishlist";
+import Wishlist from "./WishlistIcon";
 
 const NavBar = () => {
   return (

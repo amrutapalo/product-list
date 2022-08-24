@@ -1,13 +1,10 @@
-import React from "react";
+import React from 'react';
+import './Wishlist.css'
 
 const Wishlist = () => {
   return (
-    <>
-      <i className="fa-solid fa-heart"></i>
-      <span className="wishlist-number">0</span>
-      <span className="wishList">WishList</span>
-    </>
-  );
-};
+    <div>Wishlist</div>
+  )
+}
 
-export default Wishlist;
+export default Wishlist

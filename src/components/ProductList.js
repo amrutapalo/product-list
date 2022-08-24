@@ -9,10 +9,8 @@ const ProductList = () => {
       ? state.productReducer.searchedProducts
       : state.productReducer.productList
   );
-  // const searchedProducts = useSelector((state) => state.searchReducer);
 
   console.log(products);
-  // console.log(searchedProducts);
 
   return (
     <div className="productList">

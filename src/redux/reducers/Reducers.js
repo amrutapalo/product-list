@@ -17,7 +17,8 @@ let initialState = {
     type: "name",
   },
   wishlist: 0,
-  cart: 0,
+  totalCart: 0,
+  cart: [],
 };
 
 //  ---- REDUCERS -----
@@ -25,9 +26,6 @@ let initialState = {
 // ---- productReducer : for product related operations
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.DISPLAY_PRODUCTS:
-      return state;
-
     case ActionTypes.ADD_PRODUCT:
       console.log("Reducer: ADD_PRODUCT:", {
         ...state,
@@ -86,9 +84,7 @@ export const productReducer = (state = initialState, action) => {
       return { ...state, productList: newList };
 
     case ActionTypes.SEARCH_PRODUCTS:
-      console.log("searchReducer: ", action.payload);
-      console.log("state received: ", state);
-
+      console.log("searchReducer: ", state, action.payload);
       if (action.payload.expression == "") {
         return { ...state, searchedProducts: [] };
       }
@@ -108,48 +104,34 @@ export const productReducer = (state = initialState, action) => {
       } else {
         return { ...state, searchedProducts: [] };
       }
-      console.log("AFTER search: ", {
-        ...state,
-        searchedProducts: initialState.searchedProducts,
-      });
       return { ...state, searchedProducts: initialState.searchedProducts };
+
+    case ActionTypes.ADD_TO_CART:
+      console.log("ADD_TO_CART:", action.payload);
+      //todo - individually
+      let found = -1;
+      found = state.cart.findIndex(
+        (el) => el.productId === action.payload["product"].id
+      );
+
+      console.log("index: ", found);
+      if (found == -1)
+        state.cart.push({
+          quantity: action.payload.quantity,
+          productId: action.payload["product"].id,
+        });
+      else {
+        state.cart[found].quantity = action.payload.quantity;
+      }
+
+      console.log("ADD_TO_CART:", state.cart);
+      return { ...state, totalCart: state.cart.reduce((n, object) => n + object.quantity, 0) };
+
+    case ActionTypes.ADD_TO_WISHLIST:
+      console.log("ADD_TO_WISHLIST:", action.payload);
+      return state;
 
     default:
       return state;
   }
 };
-
-// ---- searchReducer : for search related operations
-// export const searchReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case ActionTypes.SEARCH_PRODUCTS:
-//       console.log("searchReducer: ", action.payload);
-//       console.log("state received: ", state);
-
-//       if (action.payload.expression == "") {
-//         return { ...state, searchedProducts: [] };
-//       }
-
-//       if (action.payload.type === "name") {
-//         initialState.searchedProducts = [];
-//         initialState.searchedProducts = state.productList.filter((element) =>
-//           element.name.toLowerCase().match(action.payload.expression)
-//         );
-//       } else if (action.payload.type === "category") {
-//         initialState.searchedProducts = [];
-//         initialState.searchedProducts = state.productList.filter(
-//           (element) =>
-//             element.category.toLowerCase() ===
-//             action.payload.expression.toLowerCase()
-//         );
-//       }
-//       console.log("AFTER search: ", {
-//         ...state,
-//         searchedProducts: initialState.searchedProducts,
-//       });
-//       return { ...state, searchedProducts: initialState.searchedProducts };
-
-//     default:
-//       return state;
-//   }
-// };
