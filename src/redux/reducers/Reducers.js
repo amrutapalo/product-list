@@ -17,7 +17,7 @@ let initialState = {
   totalWishlist: 0,
   totalCart: 0,
   cart: [],
-  wishlist: []
+  wishlist: [],
 };
 
 //  ---- REDUCERS -----
@@ -126,23 +126,33 @@ export const productReducer = (state = initialState, action) => {
 
     case ActionTypes.ADD_TO_WISHLIST:
       console.log("ADD_TO_WISHLIST:", action.payload);
-
-      // let foundWish = -1;
-      // foundWish = state.wishlist.findIndex(
-      //   (el) => el.productId === action.payload["product"].id
-      // );
-      // if (foundWish == -1)
-      //   state.wishlist.push({
-      //     quantity: 1,
-      //     productId: action.payload["product"].id,
-      //   });
-      // else {
-      //   state.wishlist[foundWish].quantity = action.payload.quantity;
-      // }
       return {
         ...state,
-        totalWishlist: action.payload.isWishlisted? state.totalWishlist + 1 : state.totalWishlist - 1,
+        totalWishlist: action.payload.isWishlisted
+          ? state.totalWishlist + 1
+          : state.totalWishlist - 1,
       };
+
+    case ActionTypes.SORT_PRODUCTS:
+      console.log("SORT_PRODUCTS:", action.payload);
+
+      let sortedList = null;
+      if (action.payload === "rating") {
+        sortedList = initialState.productList.sort(
+          (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings)
+        );
+      } else if (action.payload === "ascending") {
+        sortedList = initialState.productList.sort(
+          (a, b) => parseFloat(a.price) - parseFloat(b.price)
+        );
+      } else if (action.payload === "descending") {
+        sortedList = initialState.productList.sort(
+          (a, b) => parseFloat(b.price) - parseFloat(a.price)
+        );
+      }
+      console.log(sortedList);
+
+      return { ...state, productList: sortedList};
 
     default:
       return state;

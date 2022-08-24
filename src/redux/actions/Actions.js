@@ -48,3 +48,10 @@ export const addToWishlist = (request) => {
     }
 }
 
+export const sortProducts = (request) => {
+    return {
+        type : ActionTypes.SORT_PRODUCTS,
+        payload : request
+    }
+}
+

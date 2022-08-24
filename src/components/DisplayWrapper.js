@@ -6,7 +6,7 @@ import ProductList from "./ProductList";
 const DisplayWrapper = () => {
   return (
     <div className="displayWrapper">
-      {/* <Filter></Filter> */}
+      <Filter></Filter>
       <ProductList></ProductList>
     </div>
   );

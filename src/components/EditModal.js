@@ -36,7 +36,8 @@ const EditModal = (props) => {
     console.log("EditModal: ", product);
     dispatch(
       editProduct({
-        id: ref.current.elements.name.value + ref.current.elements.category.value,
+        id:
+          ref.current.elements.name.value + ref.current.elements.category.value,
         name: ref.current.elements.name.value,
         image: imageURL ? imageURL : product.image,
         description: ref.current.elements.description.value,
@@ -55,6 +56,10 @@ const EditModal = (props) => {
         ref={ref}
         onSubmit={handleSubmit}
       >
+        <span className="close-button"> &times; </span>
+
+        <img src={imageURL ? imageURL : product.image} alt="" />
+        <input type="file" id="image" onChange={onImageUploadHandler} />
         <input
           type="text"
           placeholder="Enter Name"
@@ -62,8 +67,6 @@ const EditModal = (props) => {
           defaultValue={product.name}
           //   onChange={onChange}
         />
-        <img src={imageURL ? imageURL : product.image} alt="" />
-        <input type="file" id="image" onChange={onImageUploadHandler}/>
         <input
           type="text"
           placeholder="Enter Description"
@@ -75,22 +78,17 @@ const EditModal = (props) => {
           type="number"
           placeholder="Enter Price"
           id="price"
-          value={product.price}
+          defaultValue={product.price}
           //   onChange={onChange}
         />
-        <select
-          name="category"
-          id="category"
-          defaultValue={product.category}
-          //   onChange={onChange}
-        >
+        <select name="category" id="category" defaultValue={"DEFAULT"}>
           <option value="DEFAULT" disabled>
             Select Category
           </option>
-          <option value="philips">Philips</option>
-          <option value="sony">Sony</option>
-          <option value="panasonic">Panasonic</option>
-          <option value="lg">LG</option>
+          <option value="books">Books</option>
+          <option value="mobile">Mobile</option>
+          <option value="television">Television</option>
+          <option value="shoes">Shoes</option>
         </select>
         <input
           type="text"
@@ -99,7 +97,9 @@ const EditModal = (props) => {
           defaultValue={product.ratings}
           //   onChange={onChange}
         />
-        <button type="submit">Save Changes</button>
+        <button type="submit" className="submit-button">
+          Save
+        </button>
       </form>
     </div>
   );
