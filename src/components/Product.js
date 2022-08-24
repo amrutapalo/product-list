@@ -136,7 +136,7 @@ const Product = (props) => {
           </div>
         </div>
       </div>
-      {showModal && <EditModal id={props.id}></EditModal>}
+      {showModal && <EditModal id={props.id} setShowModal={setShowModal}></EditModal>}
     </>
   );
 };

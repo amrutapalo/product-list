@@ -42,12 +42,9 @@ export const productReducer = (state = initialState, action) => {
 
     case ActionTypes.EDIT_SELECTED_PRODUCT:
       console.log("Reducer: EDIT_SELECTED_PRODUCT:", action.payload);
-      console.log("Reducer: EDIT_SELECTED_PRODUCT:", {
-        ...state,
-        productList: [...state.productList, action.payload],
-      });
 
-      for (let element of initialState.productList) {
+      let editedList = [...initialState.productList];
+      for (let element of editedList) {
         console.log(element);
         if (action.payload.id == element.id) {
           element.id = action.payload.id;
@@ -61,14 +58,11 @@ export const productReducer = (state = initialState, action) => {
           break;
         }
       }
-      console.log(initialState.productList);
+      console.log(editedList);
 
-      localStorage.setItem(
-        "productList",
-        JSON.stringify(initialState.productList)
-      );
+      localStorage.setItem("productList", JSON.stringify(editedList));
 
-      return { ...state, productList: initialState.productList };
+      return { ...state, productList: editedList };
 
     case ActionTypes.DELETE_SELECTED_PRODUCT:
       console.log("Reducer: DELETE_SELECTED_PRODUCT:", action.payload);
@@ -136,23 +130,19 @@ export const productReducer = (state = initialState, action) => {
     case ActionTypes.SORT_PRODUCTS:
       console.log("SORT_PRODUCTS:", action.payload);
 
-      let sortedList = null;
+      let sortedList = [...initialState.productList];
       if (action.payload === "rating") {
-        sortedList = initialState.productList.sort(
+        sortedList.sort(
           (a, b) => parseFloat(b.ratings) - parseFloat(a.ratings)
         );
       } else if (action.payload === "ascending") {
-        sortedList = initialState.productList.sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        );
+        sortedList.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
       } else if (action.payload === "descending") {
-        sortedList = initialState.productList.sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        );
+        sortedList.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       }
       console.log(sortedList);
 
-      return { ...state, productList: sortedList};
+      return { ...state, productList: sortedList };
 
     default:
       return state;

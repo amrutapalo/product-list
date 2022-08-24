@@ -34,6 +34,7 @@ const EditModal = (props) => {
     console.log(ref.current.elements);
     console.log(event.target);
     console.log("EditModal: ", product);
+
     dispatch(
       editProduct({
         id:
@@ -46,6 +47,8 @@ const EditModal = (props) => {
         ratings: ref.current.elements.ratings.value,
       })
     );
+
+    props.setShowModal(false);
   };
 
   return (
@@ -56,7 +59,13 @@ const EditModal = (props) => {
         ref={ref}
         onSubmit={handleSubmit}
       >
-        <span className="close-button"> &times; </span>
+        <span
+          className="close-button"
+          onClick={() => props.setShowModal(false)}
+        >
+          {" "}
+          &times;{" "}
+        </span>
 
         <img src={imageURL ? imageURL : product.image} alt="" />
         <input type="file" id="image" onChange={onImageUploadHandler} />
@@ -81,7 +90,7 @@ const EditModal = (props) => {
           defaultValue={product.price}
           //   onChange={onChange}
         />
-        <select name="category" id="category" defaultValue={"DEFAULT"}>
+        <select name="category" id="category" defaultValue={product.category}>
           <option value="DEFAULT" disabled>
             Select Category
           </option>
