@@ -14,6 +14,8 @@ const Product = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(0);
   const [productWishlisted, setProductWishlisted] = useState(false);
+  const didMountCart = useRef(false);
+  const didMountWishlist = useRef(false);
 
   const quantityHandler = (operation) => {
     if (operation === "decrement") {
@@ -24,24 +26,28 @@ const Product = (props) => {
   };
 
   useEffect(() => {
-    if (cartQuantity) {
+    if (didMountCart.current) {
       dispatch(
         addToCart({
           quantity: cartQuantity,
           product: props,
         })
       );
+    } else {
+      didMountCart.current = true;
     }
   }, [cartQuantity]);
 
   useEffect(() => {
-    if (productWishlisted) {
+    if (didMountWishlist.current) {
       dispatch(
         addToWishlist({
           isWishlisted: productWishlisted,
           product: props,
         })
       );
+    }else {
+      didMountWishlist.current = true;
     }
   }, [productWishlisted]);
 
